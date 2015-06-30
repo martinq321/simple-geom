@@ -1,0 +1,108 @@
+manipulateBH[bstart_, hstart_] := Manipulate[With[{
+    
+    rec1 = Rectangle[{0, 0}, {h, b}],
+    rec2 = Rectangle[{0, b}, {b, h + b}],
+    rec3 = Rectangle[{0, h + b}, {h, 2 b + h}],
+    rec4 = Rectangle[{h, 2 b}, {h + b, 2 b + h}],
+    rec5 = Rectangle[{h + b, b + h}, {2 h + b, 2 b + h}],
+    rec6 = Rectangle[{2 h, b}, {2 h + b, b + h}],
+    rec7 = Rectangle[{h + b, 0}, {2 h + b, b}],
+    rec8 = Rectangle[{h, 0}, {h + b, h}]},
+   
+   Graphics[{White, Polygon[{{0, 0}, {0, 6}, {6, 6}, {6, 0}}],
+     
+     Lighter@Lighter@Lighter@Blue, 
+     If[0 <= \[Theta], Disk[{0, b}, Sqrt@(b^2 + h^2),
+       {- ArcTan[b/h], 
+        If[\[Theta] < Pi/2, \[Theta] - ArcTan[b/h], 
+         Pi/2 - ArcTan[b/h]]}], Point[{0, 0}]],
+     If[Pi/2 < \[Theta], 
+      Disk[{0, b + h}, 
+       Sqrt@(b^2 + h^2), {-ArcTan[h/b], 
+        If[Pi/2 <= \[Theta] < 2 Pi/2, -Pi/2 + \[Theta] - ArcTan[h/b], 
+         Pi/2 - ArcTan[h/b]]}], Point[{0, 0}]],
+     If[2 Pi/2 < \[Theta], 
+      Disk[{h, 2 b + h}, 
+       Sqrt@(b^2 + h^2), {-Pi/2 - ArcTan[h/b], 
+        If[2 Pi/2 <= \[Theta] < 3 Pi/2, \[Theta] - 3 Pi/2 - 
+          ArcTan[h/b], ArcTan[b/h] - Pi/2]}], Point[{0, 0}]],
+     If[3 Pi/2 < \[Theta], 
+      Disk[{h + b, 2 b + h}, 
+       Sqrt@(b^2 + h^2), {2 Pi/2 + ArcTan[h/b], 
+        If[3 Pi/2 <= \[Theta] < 4 Pi/2, ArcTan[h/b] + \[Theta] - Pi/2,
+          ArcTan[h/b] + 3 Pi/2]}], Point[{0, 0}]],
+     If[4 Pi/2 < \[Theta], 
+      Disk[{2 h + b, b + h}, 
+       Sqrt@(b^2 + h^2), {ArcTan[b/h] + Pi/2 + ArcTan[h/b], 
+        If[4 Pi/2 <= \[Theta] < 5 Pi/2, -5 Pi/2 + \[Theta] + 2 Pi/2 + 
+          ArcTan[h/b], 2 Pi/2 + ArcTan[h/b]]}], Point[{0, 0}]],
+     If[5 Pi/2 < \[Theta], 
+      Disk[{2 h + b, b}, 
+       Sqrt@(b^2 + h^2), {2 ArcTan[b/h] + ArcTan[h/b], 
+        If[5 Pi/2 <= \[Theta] < 6 Pi/2, -6 Pi/2 + \[Theta] + 
+          2 ArcTan[b/h] + ArcTan[h/b] + Pi/2, 
+         2 ArcTan[b/h] + ArcTan[h/b] + Pi/2]}], Point[{0, 0}]],
+     If[6 Pi/2 < \[Theta], 
+      Disk[{h + b, 0}, 
+       Sqrt@(b^2 + h^2), {2 ArcTan[b/h] + ArcTan[h/b] - Pi/2, 
+        If[6 Pi/2 <= \[Theta] < 7 Pi/2, 
+         2 ArcTan[b/h] + ArcTan[h/b] + \[Theta] - 7 Pi/2, 
+         2 ArcTan[b/h] + ArcTan[h/b]]}], Point[{0, 0}]],
+     If[7 Pi/2 < \[Theta], 
+      Disk[{h, 0}, 
+       Sqrt@(b^2 + h^2), {ArcTan[h/b], 
+        If[7 Pi/2 <= \[Theta] < 8 Pi/2, 
+         ArcTan[h/b] + Pi/2 + \[Theta] - 8 Pi/2, 
+         ArcTan[h/b] + Pi/2]}], Point[{0, 0}]],
+     
+     Lighter@Lighter@Lighter@Blue,
+     If[0 <= \[Theta], rec1, Point[{0, 0}]],
+     If[Pi/2 <= \[Theta], rec2, Point[{0, 0}]],
+     If[2 Pi/2 <= \[Theta], rec3, Point[{0, 0}]],
+     If[3 Pi/2 <= \[Theta], rec4, Point[{0, 0}]],
+     If[4 Pi/2 <= \[Theta], rec5, Point[{0, 0}]],
+     If[5 Pi/2 <= \[Theta], rec6, Point[{0, 0}]],
+     If[6 Pi/2 <= \[Theta], rec7, Point[{0, 0}]],
+     If[7 Pi/2 <= \[Theta], rec8, Point[{0, 0}]],
+     
+     EdgeForm[Thin], White,
+     If[0 <= \[Theta] < Pi/2, Rotate[rec1, \[Theta], {0, b}], 
+      Point[{0, 0}]],
+     If[Pi/2 <= \[Theta] < 2 Pi/2, 
+      Rotate[rec2, \[Theta] - Pi/2, {0, h + b}], Point[{0, 0}]],
+     If[2 Pi/2 <= \[Theta] < 3 Pi/2, 
+      Rotate[rec3, \[Theta] - 2 Pi/2, {h, 2 b + h}], Point[{0, 0}]],
+     If[3 Pi/2 <= \[Theta] < 4 Pi/2, 
+      Rotate[rec4, \[Theta] - 3 Pi/2, {h + b, 2 b + h}], 
+      Point[{0, 0}]],
+     If[4 Pi/2 <= \[Theta] < 5 Pi/2, 
+      Rotate[rec5, \[Theta] - 4 Pi/2, {2 h + b, b + h}], 
+      Point[{0, 0}]],
+     If[5 Pi/2 <= \[Theta] < 6 Pi/2, 
+      Rotate[rec6, \[Theta] - 5 Pi/2, {2 h + b, b}], Point[{0, 0}]],
+     If[6 Pi/2 <= \[Theta] < 7 Pi/2, 
+      Rotate[rec7, \[Theta] - 6 Pi/2, {h + b, 0}], Point[{0, 0}]],
+     If[7 Pi/2 <= \[Theta] <= 8 Pi/2, 
+      Rotate[rec8, \[Theta] - 7 Pi/2, {h, 0}], Point[{0, 0}]],
+     
+     Dashing[None], Black, 
+     Line@# & /@ {{{0, 0}, {0, 2 b + h}}, {{0, 2 b + h}, {2 h + b, 
+         2 b + h}}, {{2 h + b, 2 b + h}, {2 h + b, 0}}, {{2 h + b, 
+         0}, {0, 0}}}
+     
+     }, AspectRatio -> Automatic]],
+  
+  {\[Theta], 0, 4 Pi}, {{b, bstart}, h (Sqrt@7 - 2), 2}, {{h, hstart},
+    b (Sqrt@7 - 2), 2}, ControlPlacement -> Right]
+
+
+areaBH[b_, h_] := 
+ ImplicitRegion[{(x)^2 + (y - b)^2 > 
+       h^2 + b^2 && (x)^2 + (y - b - h)^2 > 
+       h^2 + b^2 && (x - h)^2 + (y - 2 b - h)^2 > 
+       h^2 + b^2 && (x - h - b)^2 + (y - 2 b - h)^2 > 
+       h^2 + b^2 && (x - 2 h - b)^2 + (y - b - h)^2 > 
+       h^2 + b^2 && (x - 2 h - b)^2 + (y - b)^2 > 
+       h^2 + b^2 && (x - h - b)^2 + (y)^2 > 
+       h^2 + b^2 && (x - h)^2 + (y)^2 > h^2 + b^2}, {{x, 0, 
+      2 h + b}, {y, 0, 2 b + h}}] // Area // FullSimplify
