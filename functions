@@ -103,7 +103,7 @@ manipulateBH[bstart_, hstart_] := Manipulate[With[{
        b^2 + h^2 == (-b - h + x)^2 + y^2, 
        b^2 + h^2 == (-h + x)^2 + y^2}, {x, 0, (2 h + b)}, {y, 
        0, (2 b + h)}, AspectRatio -> Automatic, Frame -> True, 
-      ContourStyle -> {{Red, Thin}}, MaxRecursion -> 2], 
+      ContourStyle -> {{ColorData[97, "ColorList"][[1]], Thin}}, MaxRecursion -> 2], 
      Graphics[{Point[{0, 0}]}]]
     
     ]],
