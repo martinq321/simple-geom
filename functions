@@ -286,32 +286,20 @@ aMax[b_, precision_] :=
         (-1 + Sqrt@3) 1 < h < 1/(-1 + Sqrt@3), h], precision][[1]])
 
 fBH[b_, h_] := If[(-2 + Sqrt[7]) b < h < (-1 + Sqrt[3]) b, 
-   (-(1/2)) (Sqrt[b (3 b - 4 h)] - h) (b + 2 h - 
-      Sqrt[4 b^2 + 3 h^2]) - 
-     4 (((b^2 + h^2)/2) (ArcTan[h/Sqrt[4 b^2 + 3 h^2]] - 
-               ArcTan[Sqrt[b (3 b - 4 h)]/(b + 2 h)]) - 
-          (1/8) (h (b + 2 h) - 
-         Sqrt[b (3 b - 4 h)] Sqrt[4 b^2 + 3 h^2])), 
-   If[(-1 + Sqrt[3]) b < h < b/(-1 + Sqrt[3]), 
-     (-(1/2)) ((-3 + 2 Sqrt[3]) b^2 + 
-       h ((-3 + 2 Sqrt[3]) h + Sqrt[4 b^2 + 3 h^2] + 
-                 Sqrt[3 b^2 + 4 h^2] - Sqrt[12 b^2 + 9 h^2]) + 
-            
-       b (2 (-3 + Sqrt[3]) h + Sqrt[4 b^2 + 3 h^2] + 
-          Sqrt[3 b^2 + 4 h^2] - 
-                 Sqrt[9 b^2 + 12 h^2])) - 
-       4 (((h^2 + b^2)/2) (ArcTan[h/Sqrt[4 b^2 + 3 h^2]] - 
-                 ArcTan[(-b + Sqrt[3] h)/(Sqrt[3] b + h)]) - 
-            (1/8) (b (Sqrt[3] h + Sqrt[4 b^2 + 3 h^2]) + 
-          h (h - Sqrt[12 b^2 + 9 h^2]))) - 
-       4 (((b^2 + h^2)/2) (-ArcCot[b/Sqrt[3 b^2 + 4 h^2]] + 
-                 ArcTan[(b + Sqrt[3] h)/(Sqrt[3] b - h)]) - 
-            (1/8) (b^2 + h Sqrt[3 b^2 + 4 h^2] + 
-          Sqrt[3] b (h - Sqrt[3 b^2 + 4 h^2]))), 
-     If[b/(-1 + Sqrt[3]) < h < b/(Sqrt[7] - 2), 
-       (-(1/2)) (-b + Sqrt[h (-4 b + 3 h)]) (2 b + h - 
-        Sqrt[3 b^2 + 4 h^2]) - 
-         4 (((b^2 + h^2)/2) (ArcTan[(2 b + h)/Sqrt[h (-4 b + 3 h)]] - 
-                   ArcCot[b/Sqrt[3 b^2 + 4 h^2]]) - (1/
-           8) (b (2 b + h) - 
-                   Sqrt[h (-4 b + 3 h)] Sqrt[3 b^2 + 4 h^2])), 0]]]
+  (-(b Sqrt[b (3 b - 4 h)]) + 2 b h + 
+     h (-2 Sqrt[b (3 b - 4 h)] + 4 h - Sqrt[4 b^2 + 3 h^2]) + 
+     4 (b^2 + h^2) (ArcTan[Sqrt[b (3 b - 4 h)]/(b + 2 h)] - 
+        ArcTan[h/Sqrt[4 b^2 + 3 h^2]]))/2,
+  If[(-1 + Sqrt[3]) b < h < b/(-1 + Sqrt[3]), 
+   (-2 (-2 + Sqrt[3]) b^2 - 
+      h (2 (-2 + Sqrt[3]) h + Sqrt[4 b^2 + 3 h^2]) - 
+      b (-6 h + Sqrt[3 b^2 + 4 h^2]) + 
+      4 (b^2 + h^2) (ArcCot[b/Sqrt[3 b^2 + 4 h^2]] + 
+         ArcTan[(-b + Sqrt[3] h)/(Sqrt[3] b + h)] - 
+         ArcTan[(b + Sqrt[3] h)/(Sqrt[3] b - h)] - 
+         ArcTan[h/Sqrt[4 b^2 + 3 h^2]]))/2,
+   If[b/(-1 + Sqrt[3]) < h < b/(Sqrt[7] - 2), 
+    2 b^2 - (h Sqrt[h (-4 b + 3 h)])/2 + 
+      b (h - Sqrt[h (-4 b + 3 h)] - Sqrt[3 b^2 + 4 h^2]/2) + 
+      2 (b^2 + h^2) (ArcCot[b/Sqrt[3 b^2 + 4 h^2]] - 
+        ArcTan[(2 b + h)/Sqrt[h (-4 b + 3 h)]]), 0]]]
