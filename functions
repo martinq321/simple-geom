@@ -9,7 +9,7 @@ manipulateBH[bstart_, hstart_] := Manipulate[With[{
     rec7 = Rectangle[{h + b, 0}, {2 h + b, b}],
     rec8 = Rectangle[{h, 0}, {h + b, h}]},
    
-   Show[Graphics[{White, Polygon[{{0, 0}, {0, 6}, {6, 6}, {6, 0}}],
+   Show[Graphics[{
       
       Lighter@Lighter@Lighter@Blue, 
       If[0 <= \[Theta], Disk[{0, b}, Sqrt@(b^2 + h^2),
@@ -24,7 +24,8 @@ manipulateBH[bstart_, hstart_] := Manipulate[With[{
       If[2 Pi/2 < \[Theta], 
        Disk[{h, 2 b + h}, 
         Sqrt@(b^2 + h^2), {-Pi/2 - ArcTan[h/b], 
-         If[2 Pi/2 <= \[Theta] < 3 Pi/2, \[Theta] - 3 Pi/2 - 
+         If[
+          2 Pi/2 <= \[Theta] < 3 Pi/2, \[Theta] - 3 Pi/2 - 
            ArcTan[h/b], ArcTan[b/h] - Pi/2]}], Point[{0, 0}]],
       If[3 Pi/2 < \[Theta], 
        Disk[{h + b, 2 b + h}, 
@@ -89,7 +90,157 @@ manipulateBH[bstart_, hstart_] := Manipulate[With[{
       Dashing[None], Black, 
       Line@# & /@ {{{0, 0}, {0, 2 b + h}}, {{0, 2 b + h}, {2 h + b, 
           2 b + h}}, {{2 h + b, 2 b + h}, {2 h + b, 0}}, {{2 h + b, 
-          0}, {0, 0}}}
+          0}, {0, 0}}},
+      Red, PointSize[Medium], 
+      If[(-1 + Sqrt[3]) b < h < b/(-1 + Sqrt[3]) && lines == True, 
+       Point[{
+         {(*top*)h + b/2, 
+          1/2 (4 b + 2 h - Sqrt[3 b^2 + 4 h^2])}, {(*bottom*)h + b/2, 
+          2 b + h - 1/2 (4 b + 2 h - Sqrt[3 b^2 + 4 h^2])}, {(*left*)
+          1/2 Sqrt[4 b^2 + 3 h^2], b + h/2}, {(*right*)
+          2 h + b - 1/2 Sqrt[4 b^2 + 3 h^2], b + h/2}, {(*bottom left*)
+          1/2 (Sqrt[3] b + h), 1/2 (b + Sqrt[3] h)}, {(*bottom right*)
+          b + 1/2 (-Sqrt[3] b - h) + 2 h, 
+          1/2 (b + Sqrt[3] h)}, {(*top left*)1/2 (Sqrt[3] b + h), 
+          2 b + h + 1/2 (-b - Sqrt[3] h)}, {(*top right*)
+          b + 1/2 (-Sqrt[3] b - h) + 2 h, 
+          2 b + h + 1/2 (-b - Sqrt[3] h)}, {h, 0}, {0, b}, {0, 
+          b + h}, {h, 2 b + h}, {h + b, 2 b + h}, {2 h + b, 
+          b + h}, {2 h + b, b}, {h + b, 0}
+         }], Opacity[0], Point[{0, 0}]],
+      
+      Opacity[.2], Red, 
+      If[(-1 + Sqrt[3]) b < h < b/(-1 + Sqrt[3]) && lines == True, 
+       Line@# & /@ {
+         
+         {{(*frame bottom left*)h, 0}, {(*bottom left*)
+           1/2 (Sqrt[3] b + h), 1/2 (b + Sqrt[3] h)}},
+         {{(*frame bottom left*)h, 0}, {(*bottom*)h + b/2, 
+           2 b + h - 1/2 (4 b + 2 h - Sqrt[3 b^2 + 4 h^2])}},
+         
+         {{(*frame bottom right*)h + b, 0}, {(*bottom*)h + b/2, 
+           2 b + h - 1/2 (4 b + 2 h - Sqrt[3 b^2 + 4 h^2])}},
+         {{(*frame bottom right*)h + b, 0}, {(*bottom right*)
+           b + 1/2 (-Sqrt[3] b - h) + 2 h, 1/2 (b + Sqrt[3] h)}},
+         
+         {{(*frame right-side bottom*)2 h + b, b}, {(*bottom right*)
+           b + 1/2 (-Sqrt[3] b - h) + 2 h, 1/2 (b + Sqrt[3] h)}},
+         {{(*frame right-side bottom*)2 h + b, b}, {(*right*)
+           2 h + b - 1/2 Sqrt[4 b^2 + 3 h^2], b + h/2}},
+         
+         {{(*frame right-side top*)2 h + b, b + h}, {(*right*)
+           2 h + b - 1/2 Sqrt[4 b^2 + 3 h^2], b + h/2}},
+         {{(*frame right-side top*)2 h + b, b + h}, {(*top right*)
+           b + 1/2 (-Sqrt[3] b - h) + 2 h, 
+           2 b + h + 1/2 (-b - Sqrt[3] h)}},
+         
+         {{(*frame top right*)h + b, 2 b + h}, {(*top right*)
+           b + 1/2 (-Sqrt[3] b - h) + 2 h, 
+           2 b + h + 1/2 (-b - Sqrt[3] h)}},
+         {{(*frame top right*)h + b, 2 b + h}, {(*top*)h + b/2, 
+           1/2 (4 b + 2 h - Sqrt[3 b^2 + 4 h^2])}},
+         
+         {{(*frame top left*)h, 2 b + h}, {(*top*)h + b/2, 
+           1/2 (4 b + 2 h - Sqrt[3 b^2 + 4 h^2])}},
+         {{(*frame top left*)h, 2 b + h}, {(*top left*)
+           1/2 (Sqrt[3] b + h), 2 b + h + 1/2 (-b - Sqrt[3] h)}},
+         
+         {{(*frame left-side top*)0, b + h}, {(*top left*)
+           1/2 (Sqrt[3] b + h), 2 b + h + 1/2 (-b - Sqrt[3] h)}},
+         {{(*frame left-side top*)0, b + h}, {(*left*)
+           1/2 Sqrt[4 b^2 + 3 h^2], b + h/2}},
+         
+         {{(*frame left-side bottom*)0, b}, {(*left*)
+           1/2 Sqrt[4 b^2 + 3 h^2], b + h/2}},
+         {{(*frame left-side bottom*)0, b}, {(*bottom left*)
+           1/2 (Sqrt[3] b + h), 1/2 (b + Sqrt[3] h)}}
+         
+         }, Opacity[0], Point[{0, 0}]],
+      
+      Opacity[.2], Red, 
+      If[b/(-1 + Sqrt[3]) < h < b/(Sqrt@7 - 2) && lines == True, 
+       Line@# & /@ {
+         
+         {{(*frame bottom left*)h, 0}, {(*new left*)
+           1/2 (2 h + Sqrt[-4 b h + 3 h^2]), 1/2 (2 b + h)}},
+         {{(*frame bottom left*)h, 0}, {(*bottom*)h + b/2, 
+           2 b + h - 1/2 (4 b + 2 h - Sqrt[3 b^2 + 4 h^2])}},
+         
+         {{(*frame bottom right*)h + b, 0}, {(*bottom*)h + b/2, 
+           2 b + h - 1/2 (4 b + 2 h - Sqrt[3 b^2 + 4 h^2])}},
+         {{(*frame bottom right*)h + b, 0}, {(*new right*)
+           2 h + b - 1/2 (2 h + Sqrt[-4 b h + 3 h^2]), 1/2 (2 b + h)}},
+         
+         {{(*frame top right*)h + b, 2 b + h}, {(*new right*)
+           2 h + b - 1/2 (2 h + Sqrt[-4 b h + 3 h^2]), 1/2 (2 b + h)}},
+         {{(*frame top right*)h + b, 2 b + h}, {(*top*)h + b/2, 
+           1/2 (4 b + 2 h - Sqrt[3 b^2 + 4 h^2])}},
+         
+         {{(*frame top left*)h, 2 b + h}, {(*new left*)
+           1/2 (2 h + Sqrt[-4 b h + 3 h^2]), 1/2 (2 b + h)}},
+         {{(*frame top left*)h, 2 b + h}, {(*top*)h + b/2, 
+           1/2 (4 b + 2 h - Sqrt[3 b^2 + 4 h^2])}}
+         
+         }, Opacity[0], Point[{0, 0}]],
+      
+      Red, Opacity[1], 
+      If[b/(-1 + Sqrt[3]) < h < b/(Sqrt@7 - 2) && lines == True, 
+       Point[{
+         {(*new left*)1/2 (2 h + Sqrt[-4 b h + 3 h^2]), 1/2 (2 b + h)},
+         {(*new right*)2 h + b - 1/2 (2 h + Sqrt[-4 b h + 3 h^2]), 
+          1/2 (2 b + h)}, {(*top*)h + b/2, 
+          1/2 (4 b + 2 h - Sqrt[3 b^2 + 4 h^2])},
+         {(*bottom*)h + b/2, 
+          2 b + h - 
+           1/2 (4 b + 2 h - Sqrt[
+              3 b^2 + 4 h^2])}, {(*frame bottom left*)h, 
+          0}, {(*frame bottom right*)h + b, 0}, {(*frame top left*)h, 
+          2 b + h}, {(*frame top right*)h + b, 2 b + h}
+         
+         }], Opacity[0], Point[{0, 0}]],
+      
+      Opacity[.2], Red, 
+      If[h/(-1 + Sqrt[3]) < b < h/(Sqrt@7 - 2) && lines == True, 
+       Line@# & /@ {
+         
+         {{(*frame right-side bottom*)2 h + b, b}, {(*new bottom*)
+           1/2 (b + 2 h), 
+           2 b + h - 1/2 (2 b + 2 h - Sqrt[3 b^2 - 4 b h])}},
+         {{(*frame right-side bottom*)2 h + b, b}, {(*right*)
+           2 h + b - 1/2 Sqrt[4 b^2 + 3 h^2], b + h/2}},
+         
+         {{(*frame right-side top*)2 h + b, b + h}, {(*right*)
+           2 h + b - 1/2 Sqrt[4 b^2 + 3 h^2], b + h/2}},
+         {{(*frame right-side top*)2 h + b, b + h}, {(*new top*)
+           1/2 (b + 2 h), 1/2 (2 b + 2 h - Sqrt[3 b^2 - 4 b h])}},
+         
+         {{(*frame left-side top*)0, b + h}, {(*new top*)
+           1/2 (b + 2 h), 1/2 (2 b + 2 h - Sqrt[3 b^2 - 4 b h])}},
+         {{(*frame left-side top*)0, b + h}, {(*left*)
+           1/2 Sqrt[4 b^2 + 3 h^2], b + h/2}},
+         
+         {{(*frame left-side bottom*)0, b}, {(*left*)
+           1/2 Sqrt[4 b^2 + 3 h^2], b + h/2}},
+         {{(*frame left-side bottom*)0, b}, {(*new bottom*)
+           1/2 (b + 2 h), 
+           2 b + h - 1/2 (2 b + 2 h - Sqrt[3 b^2 - 4 b h])}}
+         
+         }, Opacity[0], Point[{0, 0}]],
+      
+      Red, Opacity[1], 
+      If[h/(-1 + Sqrt[3]) < b < h/(Sqrt@7 - 2) && lines == True, 
+       Point[{
+         {(*new top*)1/2 (b + 2 h), 
+          1/2 (2 b + 2 h - Sqrt[3 b^2 - 4 b h])},
+         {(*new bottom*)1/2 (b + 2 h), 
+          2 b + h - 1/2 (2 b + 2 h - Sqrt[3 b^2 - 4 b h])}, {(*left*)
+          1/2 Sqrt[4 b^2 + 3 h^2], b + h/2},
+         {(*right*)2 h + b - 1/2 Sqrt[4 b^2 + 3 h^2], 
+          b + h/2}, {(*frame left-side top*)0, b + h}, {(*frame left-
+          side bottom*)0, b}, {(*frame right-side top*)2 h + b, 
+          b + h}, {(*frame right-side bottom*)2 h + b, b}
+         
+         }], Opacity[0], Point[{0, 0}]]
       
       }, AspectRatio -> Automatic],
     
@@ -103,14 +254,15 @@ manipulateBH[bstart_, hstart_] := Manipulate[With[{
        b^2 + h^2 == (-b - h + x)^2 + y^2, 
        b^2 + h^2 == (-h + x)^2 + y^2}, {x, 0, (2 h + b)}, {y, 
        0, (2 b + h)}, AspectRatio -> Automatic, Frame -> True, 
-      ContourStyle -> {{ColorData[97, "ColorList"][[1]], Thin}}, MaxRecursion -> 2], 
-     Graphics[{Point[{0, 0}]}]]
+      ContourStyle -> {{ColorData[97, "ColorList"][[1]], Thin}}, 
+      MaxRecursion -> 2], Graphics[{Point[{0, 0}]}]]
     
     ]],
   
-  {\[Theta], 0, 4 Pi}, {{b, bstart}, h (Sqrt@7 - 2), 2}, {{h, hstart},
-    b (Sqrt@7 - 2), 2}, Control@{{circles, False}, {True, False}}, 
-  ControlPlacement -> Right]
+  {\[Theta], 0, 4 Pi, Pi/32}, {{b, bstart}, h (Sqrt@7 - 2), 
+   h/(Sqrt@7 - 2)}, {{h, hstart}, b (Sqrt@7 - 2), b/(Sqrt@7 - 2)}, 
+  Control@{{circles, False}, {True, False}}, 
+  Control@{{lines, False}, {True, False}}, ControlPlacement -> Right]
 
 
 areaBH[b_, h_] := 
@@ -123,3 +275,43 @@ areaBH[b_, h_] :=
        h^2 + b^2 && (x - h - b)^2 + (y)^2 > 
        h^2 + b^2 && (x - h)^2 + (y)^2 > h^2 + b^2}, {{x, 0, 
       2 h + b}, {y, 0, 2 b + h}}] // Area // FullSimplify
+
+aMax[b_, precision_] := 
+ b (h /. SetPrecision[
+      Solve[3 - 2 (-2 + Sqrt[3]) h - Sqrt[4 + 3 h^2] - 
+          4 h (ArcTan[(1 - Sqrt[3] h)/(Sqrt[3] + h)] + 
+             ArcTan[(1 + Sqrt[3] h)/(Sqrt[3] - h)] + 
+             ArcTan[h/Sqrt[4 + 3 h^2]] - ArcTan[Sqrt[3 + 4 h^2]]) == 
+         0 &&
+        (-1 + Sqrt@3) 1 < h < 1/(-1 + Sqrt@3), h], precision][[1]])
+
+fBH[b_, h_] := If[(-2 + Sqrt[7]) b < h < (-1 + Sqrt[3]) b, 
+   (-(1/2)) (Sqrt[b (3 b - 4 h)] - h) (b + 2 h - 
+      Sqrt[4 b^2 + 3 h^2]) - 
+     4 (((b^2 + h^2)/2) (ArcTan[h/Sqrt[4 b^2 + 3 h^2]] - 
+               ArcTan[Sqrt[b (3 b - 4 h)]/(b + 2 h)]) - 
+          (1/8) (h (b + 2 h) - 
+         Sqrt[b (3 b - 4 h)] Sqrt[4 b^2 + 3 h^2])), 
+   If[(-1 + Sqrt[3]) b < h < b/(-1 + Sqrt[3]), 
+     (-(1/2)) ((-3 + 2 Sqrt[3]) b^2 + 
+       h ((-3 + 2 Sqrt[3]) h + Sqrt[4 b^2 + 3 h^2] + 
+                 Sqrt[3 b^2 + 4 h^2] - Sqrt[12 b^2 + 9 h^2]) + 
+            
+       b (2 (-3 + Sqrt[3]) h + Sqrt[4 b^2 + 3 h^2] + 
+          Sqrt[3 b^2 + 4 h^2] - 
+                 Sqrt[9 b^2 + 12 h^2])) - 
+       4 (((h^2 + b^2)/2) (ArcTan[h/Sqrt[4 b^2 + 3 h^2]] - 
+                 ArcTan[(-b + Sqrt[3] h)/(Sqrt[3] b + h)]) - 
+            (1/8) (b (Sqrt[3] h + Sqrt[4 b^2 + 3 h^2]) + 
+          h (h - Sqrt[12 b^2 + 9 h^2]))) - 
+       4 (((b^2 + h^2)/2) (-ArcCot[b/Sqrt[3 b^2 + 4 h^2]] + 
+                 ArcTan[(b + Sqrt[3] h)/(Sqrt[3] b - h)]) - 
+            (1/8) (b^2 + h Sqrt[3 b^2 + 4 h^2] + 
+          Sqrt[3] b (h - Sqrt[3 b^2 + 4 h^2]))), 
+     If[b/(-1 + Sqrt[3]) < h < b/(Sqrt[7] - 2), 
+       (-(1/2)) (-b + Sqrt[h (-4 b + 3 h)]) (2 b + h - 
+        Sqrt[3 b^2 + 4 h^2]) - 
+         4 (((b^2 + h^2)/2) (ArcTan[(2 b + h)/Sqrt[h (-4 b + 3 h)]] - 
+                   ArcCot[b/Sqrt[3 b^2 + 4 h^2]]) - (1/
+           8) (b (2 b + h) - 
+                   Sqrt[h (-4 b + 3 h)] Sqrt[3 b^2 + 4 h^2])), 0]]]
